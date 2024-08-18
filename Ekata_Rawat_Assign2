@@ -1,0 +1,30 @@
+print('1.Sign in\n2.Log in')
+while(True):
+ choice=input("Enter a choice: ")
+ if choice=='1':
+    user_name=input("Enter a username: ")
+    psswd=input("Set a password: ")
+    mobile_no=input("Enter your mobile number: ")
+    with open('Login.txt','a') as f:
+        f.write(user_name+" "+psswd+" "+mobile_no+"\n")
+ else:
+    user_name=input("Enter your username: ")
+    psswd=input("Enter your password: ")
+    with open('Login.txt','r') as f:
+        info=f.read()
+        users=user_name+' '+psswd
+        if users in info:
+            print('Login successful')
+            break
+        else:
+            print('Login Failed')
+
+# Uploding Login.txt to Login.json
+with open('Login.txt','r') as f:
+        info=f.read()
+import json
+with open("Login.json",'w') as json_fl:
+   json.dump(info,json_fl)
+with open("Login.json",'r') as f:
+   content_json=json.load(f)
+print(content_json)
